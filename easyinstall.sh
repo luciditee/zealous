@@ -26,6 +26,7 @@ tar xzvf ./gcc-6.2.0.tar.gz
 rm ./gcc-6.2.0.tar.gz
 cd gcc-6.2.0
 ./contrib/download_prerequisites
+cd ../build-gcc
 ../gcc-6.2.0/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers
 make all-gcc
 make all-target-libgcc
