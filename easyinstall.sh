@@ -31,4 +31,4 @@ make all-target-libgcc
 make install-gcc
 make install-target-libgcc
 
-echo "export PATH=\"\$HOME/opt/cross/bin:\$PATH\"" >> $HOME/.bashrc
+printf "\nexport PATH=\"\$HOME/opt/cross/bin:\$PATH\"\n" >> $HOME/.bashrc
