@@ -25,6 +25,7 @@ wget https://ftp.gnu.org/gnu/gcc/gcc-6.2.0/gcc-6.2.0.tar.gz
 tar xzvf ./gcc-6.2.0.tar.gz
 rm ./gcc-6.2.0.tar.gz
 cd build-gcc
+../gcc-6.2.0/contrib/download_prerequisites
 ../gcc-6.2.0/configure --target=$TARGET --prefix="$PREFIX" --disable-nls --enable-languages=c,c++ --without-headers
 make all-gcc
 make all-target-libgcc
