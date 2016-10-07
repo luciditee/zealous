@@ -67,4 +67,20 @@ _start:
 	cli
 1:	hlt
 	jmp 1b
+
+# global descriptor table
+.global installgdt
+.type installgdt, @function
+installgdt:
+	cli
+	lgdt (gp)
+	mov 0xC0000010, %ax
+	mov %ax, %ds
+	mov %ax, %es
+	mov %ax, %fs
+	mov %gs, %ax
+	mov %ss, %ax
+	sti
+	ret
+	
 	
