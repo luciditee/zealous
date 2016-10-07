@@ -62,6 +62,7 @@ _start:
 	movl %cr3, %ecx
 	movl %ecx, %cr3
 	mov $stack_top, %esp
+	call gdt_prepare
 	call kernel_main
 
 	cli
@@ -74,7 +75,7 @@ _start:
 installgdt:
 	cli
 	lgdt (gp)
-	mov 0xC0000010, %ax
+	mov $0x10, %ax
 	mov %ax, %ds
 	mov %ax, %es
 	mov %ax, %fs
