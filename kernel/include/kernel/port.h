@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2016 Zealous Development Team.
  *
@@ -15,14 +16,19 @@
  *
  */
 
-#ifndef _KERNEL_TTY_H
-#define _KERNEL_TTY_H
+#include <stdint.h>
 
-#include <stddef.h>
+#ifndef _KERNEL_PORT_H
+#define _KERNEL_PORT_H
 
-void terminal_initialize(void);
-void terminal_putchar(char c);
-void terminal_write(const char* data, size_t size);
-void terminal_writestring(const char* data);
+static inline uint8_t inb (uint8_t port) {
+	uint8_t ret;
+	__asm__ __volatile__ ("inb %1, %0" : "=a" (ret) : "dN" (port));
+	return ret;
+}
+
+static inline uint8_t outb (uint8_t port, uint8_t data) {
+	__asm__ __volatile__ ("outb %1, %0" : : "dN" (port), "a" (data));
+}
 
 #endif

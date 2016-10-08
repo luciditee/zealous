@@ -1,1 +1,0 @@
-void gdt_prepare();

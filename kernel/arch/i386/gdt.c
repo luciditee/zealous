@@ -16,9 +16,7 @@
  *
  */
 
-#include <stdio.h>
 #include <stdint.h>
-#include <kernel/gdt.h>
  
 #define GDT_SIZE 5
 
