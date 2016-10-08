@@ -20,7 +20,7 @@
 #include <stdint.h>
 #include <kernel/gdt.h>
  
-#define GDT_SIZE 3
+#define GDT_SIZE 5
 
 extern void installgdt();
 
@@ -64,7 +64,9 @@ void gdt_prepare() {
     gp.limit = (sizeof(struct gdt_entry) * GDT_SIZE) - 1;
     gp.base = (uint32_t)&gdt;
     gdtset(0, 0, 0, 0, 0); // null descriptor
-    gdtset(1, 0, 0xFFFFFFFF, 0x9A, 0xCF); // code segment
-    gdtset(2, 0, 0xFFFFFFFF, 0x92, 0xCF); // data segment
+    gdtset(1, 0, 0xFFFFFFFF, 0x9A, 0xCF); // code segment - kernel space
+    gdtset(2, 0, 0xFFFFFFFF, 0x92, 0xCF); // data segment - kernel space
+    gdtset(3, 0, 0xFFFFFFFF, 0xFE, 0xC0); // code segment - user space
+    gdtset(4, 0, 0xFFFFFFFF, 0xFE, 0xC0); // data segment - user space
     installgdt();
 }
