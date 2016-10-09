@@ -80,6 +80,8 @@ _start:
 	mov $stack_top, %esp
 	call gdt_prepare
 	call idt_prepare
+	
+	sti
 	call kernel_main
 
 	cli
@@ -98,7 +100,6 @@ installgdt:
 	mov %ax, %fs
 	mov %gs, %ax
 	mov %ss, %ax
-	sti
 	ret
 	
 .global installidt
