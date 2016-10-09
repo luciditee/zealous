@@ -19,14 +19,7 @@
 #include <stdint.h>
 #include <kernel/tty.h>
 
-uint8_t dummy(uint8_t a) {
-	return a;
-}
-
 void kernel_main(void) {
 	terminal_initialize();
-	uint8_t b = 3;
-	uint8_t a = 8 / (b-3);
-	dummy(a);
-	printf("Hello world!");
+	__asm__ __volatile ("idiv %b0\n\t" : : "r"(0) : "eax");
 }
