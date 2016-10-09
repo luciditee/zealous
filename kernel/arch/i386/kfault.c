@@ -14,19 +14,23 @@
  * under the License.
  *
  */
-
+ 
+#include <kernel/kfault.h>
+#include <kernel/tty.h>
 #include <stdio.h>
 #include <stdint.h>
-#include <kernel/tty.h>
 
-uint8_t dummy(uint8_t a) {
-	return a;
-}
+struct kregisters {
+	uint32_t gs, fs, es, ds;
+	uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+	uint32_t interrupt, errorcode;
+	uint32_t eip, cs, eflags, uesp, ss;
+};
 
-void kernel_main(void) {
-	terminal_initialize();
-	uint8_t b = 3;
-	uint8_t a = 8 / (b-3);
-	dummy(a);
-	printf("Hello world!");
+void kfault(struct kregisters *reg) {
+	if (reg->interrupt < 32) {
+		printf(kernel_exceptions[reg->interrupt]);
+		printf(" exception, halting system");
+		for(;;);
+	}
 }
