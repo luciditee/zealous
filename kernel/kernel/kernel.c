@@ -19,6 +19,7 @@
 #include <stdint.h>
 #include <kernel/tty.h>
 
-void kernel_main(void) {
-	__asm__ __volatile ("idiv %b0\n\t" : : "r"(0) : "eax");
+void kmain(void) {
+	printf("Hello, world!");
+	//__asm__ __volatile ("idiv %b0\n\t" : : "r"(0) : "eax");
 }

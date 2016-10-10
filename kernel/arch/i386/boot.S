@@ -83,7 +83,7 @@ _start:
 	
 	sti
 	call vgaterm_initialize
-	call kernel_main
+	call kmain
 	cli
 	
 1:	hlt

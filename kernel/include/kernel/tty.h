@@ -20,7 +20,9 @@
 
 #include <stddef.h>
 
+void vgaterm_cls();
 void vgaterm_initialize(void);
+void vgaterm_mvcursor(size_t x, size_t y);
 void vgaterm_putchar(char c);
 void vgaterm_write(const char* data, size_t size);
 void vgaterm_writestring(const char* data);
