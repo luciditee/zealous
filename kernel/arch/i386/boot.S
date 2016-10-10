@@ -80,9 +80,9 @@ _start:
 	mov $stack_top, %esp
 	call gdt_prepare
 	call idt_prepare
-	
-	sti
 	call vgaterm_initialize
+	sti
+	
 	call kmain
 	cli
 	
