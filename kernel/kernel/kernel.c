@@ -20,6 +20,6 @@
 #include <kernel/tty.h>
 
 void kmain(void) {
-	printf("Hello, world!");
+	printf("Hello, world!\rHallo,\n");
 	//__asm__ __volatile ("idiv %b0\n\t" : : "r"(0) : "eax");
 }

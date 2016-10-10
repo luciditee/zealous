@@ -54,6 +54,21 @@ void vgaterm_putentryat(unsigned char c, uint8_t color, size_t x, size_t y) {
 
 void vgaterm_putchar(char c) {
 	unsigned char uc = c;
+		
+	switch (uc) {
+		case 0: // ignore null bytes
+			return;
+		case '\n': // line feed, falls through to carriage return
+			if (++vgaterm_row == VGA_HEIGHT) {
+				vgaterm_row = 0;
+			}
+		case '\r': // carriage return
+			vgaterm_column = 0;
+			vgaterm_mvcursor(vgaterm_column, vgaterm_row);
+			return;
+		break;
+	}
+	
 	vgaterm_putentryat(uc, vgaterm_color, vgaterm_column, vgaterm_row);
 	size_t column = vgaterm_column + 1;
 	size_t row = vgaterm_row;
