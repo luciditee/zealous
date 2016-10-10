@@ -14,16 +14,17 @@
  * under the License.
  *
  */
- 
-#include <kernel/kfault.h>
-#include <kernel/kregisters.h>
-#include <kernel/tty.h>
-#include <stdio.h>
 
-void kfault(struct kregisters *reg) {
-	if (reg->interrupt < 32) {
-		printf(kernel_exceptions[reg->interrupt]);
-		printf(" exception, halting system");
-		for(;;);
-	}
-}
+#include <stdint.h>
+
+#ifndef _KERNEL_KREGISTERS_H
+#define _KERNEL_KREGISTERS_H
+
+struct kregisters {
+	uint32_t gs, fs, es, ds;
+	uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+	uint32_t interrupt, errorcode;
+	uint32_t eip, cs, eflags, uesp, ss;
+};
+
+#endif

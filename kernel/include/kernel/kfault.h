@@ -16,7 +16,7 @@
  */
  
 #ifndef _KERNEL_KFAULT_H
-#define _KERNEL_KFAULT_H
+#define _KERNEL_KFAULT_H 1
 
 const char* kernel_exceptions[] = {
 	"Division by zero",

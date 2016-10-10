@@ -82,6 +82,7 @@ _start:
 	call idt_prepare
 	
 	sti
+	call vgaterm_initialize
 	call kernel_main
 	cli
 	

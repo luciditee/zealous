@@ -20,6 +20,5 @@
 #include <kernel/tty.h>
 
 void kernel_main(void) {
-	terminal_initialize();
 	__asm__ __volatile ("idiv %b0\n\t" : : "r"(0) : "eax");
 }

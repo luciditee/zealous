@@ -15,15 +15,11 @@
  *
  */
  
-#include <kernel/kfault.h>
 #include <kernel/kregisters.h>
-#include <kernel/tty.h>
 #include <stdio.h>
 
-void kfault(struct kregisters *reg) {
-	if (reg->interrupt < 32) {
-		printf(kernel_exceptions[reg->interrupt]);
-		printf(" exception, halting system");
-		for(;;);
-	}
+void irq_callback(struct kregisters *reg) {
+	// TODO: handle IRQ based on device bindings
+	if (reg->interrupt >= 32)
+		printf("Received IRQ callback");
 }
