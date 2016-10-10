@@ -32,5 +32,5 @@ void kfault(struct kregisters *reg) {
 		printf(kernel_exceptions[reg->interrupt]);
 		printf(" exception, halting system");
 		for(;;);
-	}
+	} 
 }

@@ -7,6 +7,6 @@ gdb ./sysroot/boot/zealous.kernel \
         -ex 'target remote | exec qemu-system-$(./target-triplet-to-arch.sh $HOST) -kernel ./sysroot/boot/zealous.kernel -no-shutdown -no-reboot -S -gdb stdio' \
         -ex 'layout src' \
         -ex 'layout reg' \
-	-ex 'continue'
+		-ex 'continue'
 
 

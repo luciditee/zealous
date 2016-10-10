@@ -21,14 +21,21 @@
 #ifndef _KERNEL_PORT_H
 #define _KERNEL_PORT_H
 
+static inline void io_wait(void)
+{
+    /* Port 0x80 is used for 'checkpoints' during POST. */
+    /* The Linux kernel seems to think it is free for use :-/ */
+    __asm__ __volatile__ ( "outb %b0, $0x80" : : "a"(0) );
+}
+
 static inline uint8_t inb (uint8_t port) {
 	uint8_t ret;
-	__asm__ __volatile__ ("inb %1, %0" : "=a" (ret) : "dN" (port));
+	__asm__ __volatile__ ("inb %w1, %0" : "=a" (ret) : "dN" (port));
 	return ret;
 }
 
-static inline uint8_t outb (uint8_t port, uint8_t data) {
-	__asm__ __volatile__ ("outb %1, %0" : : "dN" (port), "a" (data));
+static inline void outb (uint8_t port, uint8_t data) {
+	__asm__ __volatile__ ("outb %1, %w0" : : "dN" (port), "a" (data));
 }
 
 #endif
