@@ -71,7 +71,7 @@ void vgaterm_putchar(char c) {
 		break;
 		case '\t': // horizontal tab
 			next = vgaterm_column + 1;
-			while (next % 4 != 0) {
+			while (next % VGATERM_TAB_STOP != 0) {
 				next++;
 				if (next >= VGA_WIDTH) {
 					if (++vgaterm_row == VGA_HEIGHT) {
