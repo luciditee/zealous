@@ -20,6 +20,8 @@
 
 #include <stddef.h>
 
+#define VGATERM_TAB_STOP 4
+
 void vgaterm_cls();
 void vgaterm_initialize(void);
 void vgaterm_mvcursor(size_t x, size_t y);
