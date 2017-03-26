@@ -1,0 +1,27 @@
+void vgaterm_scroll() {
+	// I chose to use separate loops for this because it ends up being faster than clearing and
+	// redrawing the entire screen for each line
+	// Clear first row
+	for (size_t r = 0; r < VGA_WIDTH; r++) {
+		vgaterm_buffer[r] = vga_entry(' ', vgaterm_color);
+	}
+	
+	// Iterate all subsequent rows and copy their contents to the previous one.
+	for (size_t y = 1; y < VGA_HEIGHT; y++) {
+		for (size_t x = 0; x < VGA_WIDTH; x++) {
+			const size_t thisRow = (y * VGA_WIDTH) + x;
+			const size_t previousRow = (y-1) * VGA_WIDTH + x;
+			vgaterm_buffer[previousRow] = vgaterm_buffer[thisRow];
+		}
+	}
+	
+	// Blank final row and set cursor position to beginning of bottom line
+	for (size_t z = 0; z < VGA_WIDTH; z++) {
+		const size_t finalIndex = (VGA_HEIGHT-1) * VGA_WIDTH + z;
+		vgaterm_buffer[finalIndex] = vga_entry(' ', vgaterm_color);
+	}
+	
+	vgaterm_column = 0;
+	vgaterm_row = VGA_HEIGHT-1;
+	vgaterm_mvcursor(0, vgaterm_row);
+}

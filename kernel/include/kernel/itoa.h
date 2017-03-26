@@ -14,11 +14,10 @@
  * under the License.
  *
  */
+ 
+#ifndef _KERNEL_ITOA_H
+#define _KERNEL_ITOA_H
 
-#include <stdio.h>
-#include <stdint.h>
-#include <kernel/tty.h>
+char* itoa(int value, char* str, int base);
 
-void kmain(void) {	
-	printf("hello world");
-}
+#endif

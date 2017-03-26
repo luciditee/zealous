@@ -15,10 +15,30 @@
  *
  */
 
-#include <stdio.h>
-#include <stdint.h>
-#include <kernel/tty.h>
+#ifndef _KERNEL_SDEBUG_H
+#define _KERNEL_SDEBUG_H
 
-void kmain(void) {	
-	printf("hello world");
+#include <stdint.h>
+#include <kernel/port.h>
+#include <string.h>
+
+static inline void sdebug_putc(char c) {
+	outb(0x3F8, (uint8_t)c);
 }
+
+static inline void sdebug_puts(const char* str, size_t length) {
+	for (size_t i = 0; i < length; i++) {
+		sdebug_putc(str[i]);
+	}
+}
+
+static inline void sdebug_putln(const char* str, size_t length) {
+	for (size_t i = 0; i < length; i++) {
+		sdebug_putc(str[i]);
+	}
+	
+	sdebug_putc('\r');
+	sdebug_putc('\n');
+}
+
+#endif
